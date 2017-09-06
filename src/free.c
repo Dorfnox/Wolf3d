@@ -6,7 +6,7 @@
 /*   By: bpierce <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/23 10:32:41 by bpierce           #+#    #+#             */
-/*   Updated: 2017/09/02 15:30:01 by bpierce          ###   ########.fr       */
+/*   Updated: 2017/09/05 15:28:55 by bpierce          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,14 @@ static void	free_map(t_map *map)
 int			free_stuff(t_wolf *w)
 {
 	mlx_destroy_window(w->mlx, w->win);
+	mlx_destroy_image(w->mlx, w->win_screen->img);
+	mlx_destroy_image(w->mlx, w->snow_screen->img);
+	mlx_destroy_image(w->mlx, w->crosshair_x->img);
+	mlx_destroy_image(w->mlx, w->crosshair_y->img);
+	free(w->win_screen);
+	free(w->snow_screen);
+	free(w->crosshair_x);
+	free(w->crosshair_y);
 	free(w->kp);
 	free(w->kr);
 	free(WOLF);

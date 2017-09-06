@@ -6,7 +6,7 @@
 /*   By: bpierce <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/22 14:11:51 by bpierce           #+#    #+#             */
-/*   Updated: 2017/09/03 18:59:32 by bpierce          ###   ########.fr       */
+/*   Updated: 2017/09/05 16:24:13 by bpierce          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ typedef struct		s_trig
 	unsigned int	drs:1;
 	unsigned int	help:1;
 	unsigned int	snow:1;
-	t_xyz			mm;
 }					t_trig;
 
 typedef struct		s_player
@@ -126,12 +125,14 @@ typedef struct		s_wolf
 	void			*win;
 	void			(**kp)(struct s_wolf *);
 	void			(**kr)(struct s_wolf *);
-	void			*win_screen;
-	void			*snow_screen;
 	struct s_trig	*t;
 	struct s_player	*p;
 	struct s_map	*map;
 	struct s_image	*screen;
+	struct s_image	*win_screen;
+	struct s_image	*snow_screen;
+	struct s_image	*crosshair_x;
+	struct s_image	*crosshair_y;
 }					t_wolf;
 
 /*
@@ -154,8 +155,10 @@ int					expose_i_guess(t_wolf *w);
 void				raycast(t_wolf *w);
 void				draw_stuff(t_wolf *w);
 void				help_screen(t_wolf *w);
-void				*win_screen(t_wolf *w);
-void				*snow_screen(t_wolf *w);
+t_image				*win_screen(t_wolf *w);
+t_image				*snow_screen(t_wolf *w);
+t_image				*crosshair_x(t_wolf *w);
+t_image				*crosshair_y(t_wolf *w);
 void				move_forward(t_wolf *w);
 void				move_backward(t_wolf *w);
 void				move_acceleratively(t_wolf *w);

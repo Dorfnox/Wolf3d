@@ -6,7 +6,7 @@
 #    By: bpierce <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/25 10:27:14 by bpierce           #+#    #+#              #
-#    Updated: 2017/09/03 19:17:57 by bpierce          ###   ########.fr        #
+#    Updated: 2017/09/05 16:45:22 by bpierce          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ FILES = main \
 		hooks \
 		hookarrays \
 		hooks_esc \
-		hooks_mm \
+		mousemovehook \
 		keyhooks1 \
 		keyhooks2 \
 		keyhooks3 \

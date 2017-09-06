@@ -6,7 +6,7 @@
 /*   By: bpierce <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/02 14:23:35 by bpierce           #+#    #+#             */
-/*   Updated: 2017/09/03 19:38:46 by bpierce          ###   ########.fr       */
+/*   Updated: 2017/09/05 16:56:06 by bpierce          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,17 +55,21 @@ void	rotate_acceleratively(t_wolf *w)
 	if ((TRIG->rr || TRIG->rl) && !(TRIG->rr && TRIG->rl))
 	{
 		if (TRIG->rr)
-			WOLF->rrrla += (WOLF->rrrla < 100) ? 20 : 0;
+			WOLF->rrrla += (WOLF->rrrla < 100) ? 15 : 0;
 		else if (TRIG->rl)
-			WOLF->rrrla -= (WOLF->rrrla > -100) ? 20 : 0;
+			WOLF->rrrla -= (WOLF->rrrla > -100) ? 15 : 0;
 		if (WOLF->rrrla != 0)
 			(WOLF->rrrla > 0) ? rotate_right(w) : rotate_left(w);
+		if (WOLF->rrrla < 15 && WOLF->rrrla > -15)
+			WOLF->rrrla = 0;
 	}
 	else
 	{
 		if (WOLF->rrrla != 0)
-			WOLF->rrrla += (WOLF->rrrla < 0) ? 20 : -20;
+			WOLF->rrrla += (WOLF->rrrla < 0) ? 15 : -15;
 		if (WOLF->rrrla != 0)
 			(WOLF->rrrla > 0) ? rotate_right(w) : rotate_left(w);
+		if (WOLF->rrrla < 15 && WOLF->rrrla > -15)
+			WOLF->rrrla = 0;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: bpierce <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/22 15:30:14 by bpierce           #+#    #+#             */
-/*   Updated: 2017/09/03 19:22:38 by bpierce          ###   ########.fr       */
+/*   Updated: 2017/09/05 15:29:33 by bpierce          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ static t_player	*new_t_player(t_map *m, int x, int y, int line_len)
 		while (++x < line_len)
 		{
 			if (m->map[y][x] == 'P')
-				mrwolf->pos.x = x;
+				mrwolf->pos.x = x + 0.5;
 			if (m->map[y][x] == 'P')
-				mrwolf->pos.y = y;
+				mrwolf->pos.y = y + 0.5;
 			if (m->map[y][x] == 'E')
 				mrwolf->dst.x = x;
 			if (m->map[y][x] == 'E')
@@ -70,6 +70,14 @@ static t_player	*new_t_player(t_map *m, int x, int y, int line_len)
 	mrwolf->move_speed = 1;
 	mrwolf->rot_speed = 3;
 	return (mrwolf);
+}
+
+static void		initialize_screens(t_wolf *w)
+{
+	w->win_screen = win_screen(w);
+	w->snow_screen = snow_screen(w);
+	w->crosshair_x = crosshair_x(w);
+	w->crosshair_y = crosshair_y(w);
 }
 
 t_wolf			*initialize_wolf(void *mlx, char *map_name)
@@ -88,8 +96,7 @@ t_wolf			*initialize_wolf(void *mlx, char *map_name)
 	new->win = mlx_new_window(new->mlx, W, H, "Fun Times at Wolf3d High");
 	new->screen = new_image(new, W, H);
 	set_arrays(new);
-	new->win_screen = win_screen(new);
-	new->snow_screen = snow_screen(new);
+	initialize_screens(new);
 	initialize_hooks(new);
 	rotate_left(new);
 	new->p->acc = 5;
