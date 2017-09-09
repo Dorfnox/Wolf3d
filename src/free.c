@@ -6,7 +6,7 @@
 /*   By: bpierce <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/23 10:32:41 by bpierce           #+#    #+#             */
-/*   Updated: 2017/09/05 15:28:55 by bpierce          ###   ########.fr       */
+/*   Updated: 2017/09/08 16:56:25 by bpierce          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ int			free_stuff(t_wolf *w)
 	free(TRIG);
 	free_map(MAP);
 	free(w);
+	system("killall afplay");
 	return (1);
 }

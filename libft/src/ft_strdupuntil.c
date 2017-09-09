@@ -6,7 +6,7 @@
 /*   By: aderby <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/07 15:41:14 by aderby            #+#    #+#             */
-/*   Updated: 2017/06/27 14:42:16 by bpierce          ###   ########.fr       */
+/*   Updated: 2017/09/06 16:02:55 by bpierce          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,13 @@ char			*ft_strdupuntil(const char *s, const char c)
 	i = 0;
 	if (s && c)
 	{
-		if (s[i] == '\0')
-			return (ft_strnew(1));
-		while (s[i] != c && s[i])
-			i++;
-		if (!(str = ft_strsub(s, 0, i)))
-			return (NULL);
+		if (s[i] != '\0')
+		{
+			while (s[i] != c && s[i])
+				i++;
+			if ((str = ft_strsub(s, 0, i)))
+				return (str);
+		}
 	}
-	else
-		return (ft_strnew(1));
-	return (str);
+	return (NULL);
 }

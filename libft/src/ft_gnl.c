@@ -6,48 +6,44 @@
 /*   By: bpierce <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/14 11:47:59 by bpierce           #+#    #+#             */
-/*   Updated: 2017/06/28 15:02:40 by bpierce          ###   ########.fr       */
+/*   Updated: 2017/09/08 14:00:11 by bpierce          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "get_next_line.h"
 
-static void		buffer_update(t_file **fptr, char **line)
+static void		buffer_update(t_file *fptr, char **line)
 {
 	int		i;
 	int		len;
 	char	*tmp;
 
-	*line = ft_strdupuntil((*fptr)->str, '\n');
-	i = ft_strccountto((*fptr)->str, '\n');
-	len = ft_strlen((*fptr)->str);
+	if (fptr->line)
+		free(fptr->line);
+	fptr->line = ft_strdupuntil(fptr->str, '\n');
+	i = ft_strccountto(fptr->str, '\n');
+	len = ft_strlen(fptr->str);
 	if (len > 0)
 	{
-		if (i < len)
-			tmp = ft_strsub((*fptr)->str, i + 1, (len - i));
-		else
-			tmp = ft_strnew(0);
-		free((*fptr)->str);
-		(*fptr)->str = ft_strdup(tmp);
-		free(tmp);
+		tmp = ft_strsub(fptr->str, i + 1, (len - i));
+		free(fptr->str);
+		fptr->str = tmp;
 	}
 	else
-	{
-		free((*fptr)->str);
-		(*fptr)->str = NULL;
-	}
+		ft_strdel(&fptr->str);
+	*line = fptr->line;
 }
 
-static void		delete_current_file(t_file **myfile, t_file **fptr)
+static void		delete_current_file(t_file **myfile, t_file *fptr, char **line)
 {
 	t_file	*head;
 	t_file	*tmp;
 
 	head = *myfile;
-	if (*fptr == *myfile)
+	if (fptr == *myfile)
 		head = (*myfile)->next;
-	else if ((*fptr)->next == NULL)
+	else if (fptr->next == NULL)
 	{
 		head = *myfile;
 		while ((*myfile)->next != NULL)
@@ -55,16 +51,17 @@ static void		delete_current_file(t_file **myfile, t_file **fptr)
 	}
 	else
 	{
-		while ((*myfile)->fd != (*fptr)->fd)
+		while ((*myfile)->fd != fptr->fd)
 		{
 			tmp = *myfile;
 			*myfile = (*myfile)->next;
 		}
 		tmp->next = (*myfile)->next;
 	}
-	ft_strdel(&(*myfile)->str);
+	ft_strdeltwo(&(*myfile)->str, &(*myfile)->line);
 	free(*myfile);
 	*myfile = head;
+	*line = NULL;
 }
 
 static t_file	*add_new_file(const int fd)
@@ -75,6 +72,7 @@ static t_file	*add_new_file(const int fd)
 		return (NULL);
 	tmp->fd = fd;
 	tmp->str = ft_strnew(0);
+	tmp->line = NULL;
 	tmp->next = NULL;
 	return (tmp);
 }
@@ -109,15 +107,15 @@ int				ft_gnl(const int fd, char **line)
 	while ((res = read(fd, buf, BUFF_SIZE)))
 	{
 		buf[res] = '\0';
-		fptr->str = ft_strfjoin(&(fptr->str), buf);
+		fptr->str = ft_strfjoin(&fptr->str, buf);
 		if (ft_strchr(buf, '\n'))
 			break ;
 	}
 	if (res < BUFF_SIZE && !(ft_strlen(fptr->str)))
 	{
-		delete_current_file(&myfile, &fptr);
+		delete_current_file(&myfile, fptr, line);
 		return (0);
 	}
-	buffer_update(&fptr, line);
+	buffer_update(fptr, line);
 	return (1);
 }

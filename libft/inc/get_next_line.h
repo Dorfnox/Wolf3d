@@ -6,7 +6,7 @@
 /*   By: bpierce <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/22 21:28:55 by bpierce           #+#    #+#             */
-/*   Updated: 2017/09/01 16:34:18 by bpierce          ###   ########.fr       */
+/*   Updated: 2017/09/07 20:54:42 by bpierce          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ typedef struct		s_file
 {
 	int				fd;
 	char			*str;
+	char			*line;
 	struct s_file	*next;
+	unsigned short	i:1;
 }					t_file;
 
 int					ft_gnl(const int fd, char **line);

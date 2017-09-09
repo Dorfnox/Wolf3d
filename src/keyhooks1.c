@@ -6,7 +6,7 @@
 /*   By: bpierce <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/02 13:53:25 by bpierce           #+#    #+#             */
-/*   Updated: 2017/09/03 20:00:05 by bpierce          ###   ########.fr       */
+/*   Updated: 2017/09/08 16:54:23 by bpierce          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	change_wall_colour(t_wolf *w)
 void	ice_mode(t_wolf *w)
 {
 	TRIG->snow = (TRIG->snow == 0) ? 1 : 0;
+	if (TRIG->snow == 1)
+		system("afplay audio/snow.mp3 &");
 	WOLF->fba = 0;
 	WOLF->rla = 0;
 	WOLF->acc = (WOLF->acc != 1) ? 1 : 5;

@@ -6,7 +6,7 @@
 /*   By: bpierce <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/06 13:58:54 by bpierce           #+#    #+#             */
-/*   Updated: 2017/06/11 14:36:15 by bpierce          ###   ########.fr       */
+/*   Updated: 2017/09/04 16:17:04 by bpierce          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
 	if (i < n && newsrc[i] == (unsigned char)c)
 	{
 		newdst[i] = newsrc[i];
-		return (&dst[i + 1]);
+		return (dst + i + 1);
 	}
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: bpierce <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/25 10:46:43 by bpierce           #+#    #+#             */
-/*   Updated: 2017/09/02 18:34:50 by bpierce          ###   ########.fr       */
+/*   Updated: 2017/09/07 17:12:50 by bpierce          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,6 @@ int					ft_shade_colour(int colour, double percent,
 					double constant);
 double				ft_percentof(double a, double percent);
 int					ft_gnl(const int fd, char **line);
-void				ft_gnlfreeall(t_file **myfile);
 int					ft_abs(int n);
 int					ft_sign(int n);
 
