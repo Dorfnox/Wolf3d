@@ -6,7 +6,7 @@
 /*   By: bpierce <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/24 19:41:11 by bpierce           #+#    #+#             */
-/*   Updated: 2017/09/07 21:08:47 by bpierce          ###   ########.fr       */
+/*   Updated: 2018/07/29 20:15:41 by bpierce          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ int			preliminary_char_check(char *map_name)
 	if ((fd = open(map_name, O_RDONLY)) == -1)
 		return (ft_puterror("Map open error... ", 0));
 	set_contains_to_zero(&c);
-	while (read(fd, buf, 50))
+	while ((buf_len = read(fd, buf, 50)))
 	{
+		buf[buf_len] = 0;
 		num = -1;
-		buf_len = (int)ft_strlen(buf);
 		while (++num < buf_len)
 		{
 			if (buf[num] != ' ' && buf[num] != '1' && buf[num] != 'P'
